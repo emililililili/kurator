@@ -1,0 +1,18 @@
+{
+  "name": "kurator",
+  "version": "0.1.0",
+  "description": "A zero-dependency Slack bot for sharing and curating team recommendations, running on Cloudflare Workers.",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev",
+    "tail": "wrangler tail",
+    "typecheck": "tsc"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20240909.0",
+    "typescript": "^5.5.0",
+    "wrangler": "^4.86.0"
+  }
+}

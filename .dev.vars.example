@@ -1,0 +1,24 @@
+# Copy this file to .dev.vars for local development (wrangler dev reads it).
+# In production, set each value instead with: wrangler secret put <NAME>
+# .dev.vars is gitignored. Never commit real secrets.
+
+# Required
+SLACK_BOT_TOKEN=xoxb-your-bot-token
+SLACK_SIGNING_SECRET=your-signing-secret
+DIGEST_CHANNEL_ID=C0XXXXXXX
+DIGEST_FORCE_SECRET=generate-a-long-random-string
+
+# Optional: Google Sheets archive webhook. Leave both unset to disable sheet logging.
+SHEETS_WEBHOOK_URL=
+SHEETS_WEBHOOK_SECRET=
+
+# Optional: Slack user ID allowed to delete digest posts alongside workspace owners.
+APP_OWNER_USER_ID=
+
+# Optional branding. Defaults to ":tophat:" and "Kurated" if unset.
+# DIGEST_TITLE is the digest header text, typically "<Your Company> Kurated".
+# DIGEST_HEADER_EMOJI can be a custom workspace emoji shortcode (e.g. :acme:).
+# Set these as secrets in production (wrangler secret put ...) so the values
+# stay out of the public repo.
+DIGEST_HEADER_EMOJI=
+DIGEST_TITLE=

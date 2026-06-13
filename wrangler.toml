@@ -1,0 +1,15 @@
+name = "kurator"
+main = "src/index.ts"
+compatibility_date = "2024-09-01"
+
+[triggers]
+# Wakes the Worker every Friday at 14:00 AND 15:00 UTC. The schedule config in
+# src/digest.ts is the source of truth: it posts only at 15:00 Europe/London
+# (3pm UK) on the right fortnight, so exactly one of these two fires posts, and
+# the time stays correct across BST/GMT:
+#   - Summer (BST, UTC+1): 14:00 UTC = 15:00 London  -> posts
+#   - Winter (GMT, UTC+0): 15:00 UTC = 15:00 London  -> posts
+# Cron is always UTC; weekday field is 0=Sun..6=Sat (5 = Friday). If you change
+# POST_HOUR / POST_WEEKDAY / TIME_ZONE in src/digest.ts, update these to the
+# matching UTC hour(s) and weekday.
+crons = ["0 14 * * 5", "0 15 * * 5"]
