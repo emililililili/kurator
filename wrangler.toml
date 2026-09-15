@@ -2,6 +2,13 @@ name = "kurator"
 main = "src/index.ts"
 compatibility_date = "2024-09-01"
 
+# Retains console output and exceptions in Workers Logs. Without this the
+# Worker's logs go nowhere: `wrangler tail` is live-only and cannot span the
+# days between fortnightly fires, which is why a scheduling bug went unseen
+# for three months.
+[observability]
+enabled = true
+
 [triggers]
 # Wakes the Worker daily at 14:00 AND 15:00 UTC. The schedule config in
 # src/digest.ts is the source of truth: it posts only at 15:00 Europe/London

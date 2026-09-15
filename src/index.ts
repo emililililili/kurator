@@ -89,8 +89,12 @@ export default {
     env: Env,
     ctx: ExecutionContext,
   ): Promise<void> {
+    // Log the outcome, not just failures: a skip is a clean early return with
+    // no error, so a misconfigured schedule is otherwise completely silent.
     ctx.waitUntil(
-      runDigest(env, false).catch((e) => console.error("digest error", e)),
+      runDigest(env, false)
+        .then((r) => console.log("digest", JSON.stringify(r)))
+        .catch((e) => console.error("digest error", e)),
     );
   },
 };
