@@ -58,16 +58,19 @@ const DEFAULT_DIGEST_TITLE = "Kurated";
 // handled automatically.
 //
 //   • Weekly instead of biweekly → set INTERVAL_DAYS = 7
-//   • Different time of day       → set POST_HOUR (24h clock, in TIME_ZONE)
+//   • Different time of day       → set POST_HOUR (24h clock, in TIME_ZONE),
+//                                     AND update the UTC hours in wrangler.toml
 //   • Different timezone          → set TIME_ZONE (any IANA name)
-//   • Different day of week        → set POST_WEEKDAY, AND update the cron
-//                                     weekday in wrangler.toml, AND pick a
-//                                     FIRST_DIGEST that falls on that weekday
+//   • Different day of week        → set POST_WEEKDAY, AND pick a FIRST_DIGEST
+//                                     that falls on that weekday. Do NOT pin a
+//                                     weekday in the wrangler.toml cron: it
+//                                     fired a day early and silently suppressed
+//                                     every digest for three months.
 //   • Different start / end       → set FIRST_DIGEST / LAST_DIGEST
 //
 // FIRST_DIGEST is the anchor: the digest posts on that date, then every
 // INTERVAL_DAYS after it. It MUST fall on POST_WEEKDAY, and wrangler.toml must
-// fire the cron on that weekday at/around POST_HOUR (see the note there).
+// wake the Worker at/around POST_HOUR (expressed in UTC; see the note there).
 // ─────────────────────────────────────────────────────────────────────────
 
 const TIME_ZONE = "Europe/London"; // IANA timezone all the times below are in
